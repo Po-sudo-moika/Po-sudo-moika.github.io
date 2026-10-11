@@ -1,22 +1,22 @@
 # Po-sudo-moika.github.io
 
-A personal GitHub Pages user site, live at https://po-sudo-moika.github.io. It is plain static HTML for now, built by Jekyll.
+A personal GitHub Pages user site, live at https://po-sudo-moika.github.io. It is a static site built by Astro.
 
 ## Build and deploy
 
-- `.github/workflows/jekyll-gh-pages.yml` builds the repo root with `actions/jekyll-build-pages` and deploys it with `actions/deploy-pages`.
-- It runs on every push to `main`, and can be run by hand from the Actions tab.
-- There is no `Gemfile`. The build uses the GitHub Pages Jekyll setup.
+- `.github/workflows/deploy.yml` builds the site with `withastro/action` and deploys it with `actions/deploy-pages`.
+- It runs on every push to `main`, and can be run by hand from the Actions tab. Pull requests build the site but do not deploy it.
+- The workflow's `node-version` is the one Node version pin for the project.
 
 ## Preview locally
 
-Install Ruby and the `github-pages` gem, then run `jekyll serve` in the repo root and open http://localhost:4000. For plain HTML edits, opening `index.html` in a browser also works.
+Run `npm install`, then `npm run dev`, and open the URL it prints. `npm run build` writes the built site to `dist/`.
 
 ## Where content lives
 
-- `index.html` is the home page.
-- Any other page goes in the repo root as an `.html` or `.md` file.
-- Agent files (`AGENTS.md`, `CLAUDE.md`, `GLOSSARY.md`, `docs/`) are listed under `exclude` in `_config.yml` so Jekyll does not publish them. Add new non-site files there.
+- `src/pages/index.astro` is the home page.
+- Any other page goes in `src/pages/` as an `.astro` or `.md` file. Static files go in `public/`.
+- Astro publishes only pages in `src/pages/`, files in `public/`, and what those pages import. Agent files (`AGENTS.md`, `CLAUDE.md`, `GLOSSARY.md`, `docs/`) live outside them, so they are not published. Keep new non-site files out of `src/pages/` and `public/`.
 
 ## Agent skills
 
